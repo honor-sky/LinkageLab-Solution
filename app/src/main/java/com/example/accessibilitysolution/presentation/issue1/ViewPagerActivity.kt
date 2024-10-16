@@ -34,7 +34,6 @@ class ViewPagerActivity : AppCompatActivity()  {
 
     fun setAccessibility() {
 
-        //binding.listViewpager2.stateDescription = "Button"
 
 
         ViewCompat.setAccessibilityDelegate(binding.textBtn,
@@ -60,26 +59,6 @@ class ViewPagerActivity : AppCompatActivity()  {
                     info.roleDescription = "Text"
                 }
             })
-
-
-
-
-
-        binding.listViewpager2.setAccessibilityDelegate(object : View.AccessibilityDelegate() {
-
-                 override fun onInitializeAccessibilityNodeInfo(
-                     host: View,
-                     info: AccessibilityNodeInfo
-                 ) {
-                     super.onInitializeAccessibilityNodeInfo(host, info)
-
-                     info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_ACCESSIBILITY_FOCUS)
-                     info?.text = "사용자 맞춤 음성 안내 메시지입니다."
-                 }
-
-        })
-
-
 
 
     }

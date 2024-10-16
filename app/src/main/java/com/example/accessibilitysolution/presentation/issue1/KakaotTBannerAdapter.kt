@@ -1,10 +1,12 @@
 package com.example.accessibilitysolution.presentation.issue1
 
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityNodeInfo
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import androidx.core.view.AccessibilityDelegateCompat
@@ -48,7 +50,22 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
                     // roleDescription 설정 - 필요에 따라 변경
                     info.roleDescription = "Button"
 
-                    // 접근성 설명 (contentDescription) 설정
+                }
+
+                override fun performAccessibilityAction(
+                    host: View,
+                    action: Int,
+                    args: Bundle?
+                ): Boolean {
+                    when(action) {
+                        AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS -> {
+                            Log.d("KakaotTBannerAdapter","${host.contentDescription}")
+                            val customMessage =  "${bannerDataList!!.size}개의 페이지 중 ${position + 1}번째 페이지"
+                            holder.binding.bannerItemMain.announceForAccessibility(customMessage)
+
+                        }
+                    }
+                    return super.performAccessibilityAction(host, action, args)
                 }
             })
             holder.bind(bannerDataList!![position])
