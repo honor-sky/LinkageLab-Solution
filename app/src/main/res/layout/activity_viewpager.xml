@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:theme="@style/Theme.AccessibilitySolution">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/kakao_yellow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="카카오 이슈 솔루션"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:accessibilityHeading="true"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:accessibilityHeading="true"
+        android:text="ViewPager2\n(실제 서비스에서 사용)"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ViewPager2"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/buttonBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ViewPager2"
+        android:textSize="20sp"/>
+
+
+
+    <!-- 크기 때문? -->
+    <RelativeLayout
+        android:id="@+id/listViewpager2Layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/light_grey"
+        android:importantForAccessibility="no">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/listViewpager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:importantForAccessibility="yes"
+            android:paddingLeft="6.5dp"
+            android:paddingRight="3dp" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="ViewPager"
+        android:textSize="20sp"
+        android:accessibilityHeading="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/light_grey">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/listViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="6.5dp"
+        android:paddingRight="3dp"
+        android:clipToPadding="false"/>
+    </RelativeLayout>
+</LinearLayout>

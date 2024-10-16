@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bannerItemMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingTop="33dp"
+    android:paddingStart="29dp"
+    android:background="@color/white"
+    android:importantForAccessibility="yes">
+
+    <ImageView
+        android:id="@+id/bannerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_home"
+        android:importantForAccessibility="no"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="7dp"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15.3sp"
+        android:text="집으로한번에" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="위치 사용을 동의하세요."
+        android:textSize="15.3sp"
+        android:textColor="#BCBDBE" />
+    </LinearLayout>
+
+
+</LinearLayout>
