@@ -35,15 +35,7 @@ class ViewPagerActivity : AppCompatActivity()  {
     fun setAccessibility() {
 
 
-
-        ViewCompat.setAccessibilityDelegate(binding.textBtn,
-            object : AccessibilityDelegateCompat() {
-                override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
-                    super.onInitializeAccessibilityNodeInfo(v, info)
-                    info.roleDescription = "Button"
-                }
-            })
-
+        // ViePager2에 바로 접근해 유형 정보를 바꾸려고 하면 안 됨
         ViewCompat.setAccessibilityDelegate(binding.listViewpager2,
             object : AccessibilityDelegateCompat() {
                 override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
@@ -51,16 +43,6 @@ class ViewPagerActivity : AppCompatActivity()  {
                     info.roleDescription = "Button"
                 }
             })
-
-        ViewCompat.setAccessibilityDelegate(binding.buttonBtn,
-            object : AccessibilityDelegateCompat() {
-                override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
-                    super.onInitializeAccessibilityNodeInfo(v, info)
-                    info.roleDescription = "Text"
-                }
-            })
-
-
     }
 
 

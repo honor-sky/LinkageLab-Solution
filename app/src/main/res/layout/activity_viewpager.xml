@@ -38,20 +38,6 @@
         android:text="ViewPager2\n(실제 서비스에서 사용)"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ViewPager2"
-        android:textSize="20sp"/>
-
-    <Button
-        android:id="@+id/buttonBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ViewPager2"
-        android:textSize="20sp"/>
-
 
 
     <!-- 크기 때문? -->

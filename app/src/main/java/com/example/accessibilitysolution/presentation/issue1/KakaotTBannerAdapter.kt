@@ -40,16 +40,11 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
     override fun onBindViewHolder(holder: KakaotTBannerViewHolder, position: Int) {
         if (bannerDataList != null) {
 
-            //holder.binding.bannerItemMain.contentDescription =  "${bannerDataList!!.size}개의 페이지 중 ${position + 1}번째 페이지"
-
-            //holder.binding.bannerItemMain.roleDescription = "Button"
+            // holder가 관리하는 아이템(페이지)에 접근해 유형정보 바꿔줘야 함
             ViewCompat.setAccessibilityDelegate(holder.itemView, object : AccessibilityDelegateCompat() {
                 override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
                     super.onInitializeAccessibilityNodeInfo(v, info)
-
-                    // roleDescription 설정 - 필요에 따라 변경
                     info.roleDescription = "Button"
-
                 }
 
                 override fun performAccessibilityAction(
@@ -57,17 +52,19 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
                     action: Int,
                     args: Bundle?
                 ): Boolean {
-                    when(action) {
-                        AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS -> {
-                            Log.d("KakaotTBannerAdapter","${host.contentDescription}")
-                            val customMessage =  "${bannerDataList!!.size}개의 페이지 중 ${position + 1}번째 페이지"
-                            holder.binding.bannerItemMain.announceForAccessibility(customMessage)
-
-                        }
+                    //val handled = super.performAccessibilityAction(host, action, args)  // 기본 처리 먼저
+                    if (action == AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) {
+                        // 원래 정보 출력 뒤 커스텀 메시지를 안내
+                        val pageInfoMessage = "${bannerDataList!!.size}개의 페이지 중 ${position + 1}번째 페이지"
+                        val actionInfoMessage = "활성화 하려면 두번 클릭 하세요. 길게 누르려면 두번 클릭 후 유지 하세요."
+                        holder.binding.bannerItemMain.announceForAccessibility(pageInfoMessage)
+                        holder.binding.bannerItemMain.announceForAccessibility(actionInfoMessage)
                     }
                     return super.performAccessibilityAction(host, action, args)
                 }
             })
+
+
             holder.bind(bannerDataList!![position])
         }
     }
