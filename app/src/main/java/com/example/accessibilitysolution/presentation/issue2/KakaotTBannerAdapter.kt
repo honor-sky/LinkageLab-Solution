@@ -1,4 +1,4 @@
-package com.example.accessibilitysolution.presentation.issue1
+package com.example.accessibilitysolution.presentation.issue2
 
 import android.os.Build
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
@@ -18,6 +19,7 @@ import com.example.accessibilitysolution.databinding.ItemBannerBinding
 class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTBannerViewHolder>() {
 
     private  var bannerDataList : MutableList<Int>? = null
+    var prevPosition = 0
 
 
     fun setData(bannerDataList : MutableList<Int>) {
@@ -28,7 +30,6 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
 
     inner class KakaotTBannerViewHolder (val binding: ItemBannerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Int) {
-
         }
     }
 
@@ -36,7 +37,6 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
         return KakaotTBannerViewHolder(ItemBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
     override fun onBindViewHolder(holder: KakaotTBannerViewHolder, position: Int) {
         if (bannerDataList != null) {
 
@@ -44,7 +44,7 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
             ViewCompat.setAccessibilityDelegate(holder.itemView, object : AccessibilityDelegateCompat() {
                 override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
                     super.onInitializeAccessibilityNodeInfo(v, info)
-                    info.roleDescription = "Button"
+                    info.roleDescription = "버튼"
                 }
 
                 override fun performAccessibilityAction(
@@ -52,18 +52,28 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
                     action: Int,
                     args: Bundle?
                 ): Boolean {
-                    //val handled = super.performAccessibilityAction(host, action, args)  // 기본 처리 먼저
-                    if (action == AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) {
+                    val handled = super.performAccessibilityAction(host, action, args)  // 기본 처리 먼저
+                    if(action ==  AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS ) {
                         // 원래 정보 출력 뒤 커스텀 메시지를 안내
-                        val pageInfoMessage = "${bannerDataList!!.size}개의 페이지 중 ${position + 1}번째 페이지"
-                        val actionInfoMessage = "활성화 하려면 두번 클릭 하세요. 길게 누르려면 두번 클릭 후 유지 하세요."
-                        holder.binding.bannerItemMain.announceForAccessibility(pageInfoMessage)
-                        holder.binding.bannerItemMain.announceForAccessibility(actionInfoMessage)
-                    }
-                    return super.performAccessibilityAction(host, action, args)
-                }
-            })
+                        if(prevPosition == position) {
+                            val pageInfoMessage = "${bannerDataList!!.size}개의 페이지 중 ${position + 1}번째 페이지"
+                            val actionInfoMessage = "활성화 하려면 두번 클릭 하세요. 길게 누르려면 두번 클릭 후 유지 하세요."
+                            holder.binding.bannerItemMain.announceForAccessibility(actionInfoMessage)
+                            holder.binding.bannerItemMain.announceForAccessibility(pageInfoMessage)
 
+                            prevPosition = position
+                        } else {
+                            //val pageInfoMessage = "${bannerDataList!!.size}개의 페이지 중 ${position + 1}번째 페이지"
+                            val actionInfoMessage = "활성화 하려면 두번 클릭 하세요. 길게 누르려면 두번 클릭 후 유지 하세요."
+                            //holder.binding.bannerItemMain.announceForAccessibility(pageInfoMessage)
+                            holder.binding.bannerItemMain.announceForAccessibility(actionInfoMessage)
+
+                            prevPosition = position
+                        }
+                        }
+                    return handled
+                    }
+            })
 
             holder.bind(bannerDataList!![position])
         }

@@ -28,10 +28,16 @@
     </activity>
 
     <activity
-        android:name=".presentation.issue1.ViewPagerActivity"
+        android:name=".presentation.issue2.ViewPagerActivity"
         android:exported="true"
         android:label="ViewPagerActivity"
         android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".presentation.issue1.KakaoTalkDrawerActivity"
+            android:exported="true"
+            android:label="KakaoTalkDrawerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>

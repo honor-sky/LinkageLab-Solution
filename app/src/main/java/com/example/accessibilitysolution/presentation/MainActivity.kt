@@ -4,7 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.accessibilitysolution.databinding.ActivityMainBinding
-import com.example.accessibilitysolution.presentation.issue1.ViewPagerActivity
+import com.example.accessibilitysolution.presentation.issue1.KakaoTalkDrawerActivity
+import com.example.accessibilitysolution.presentation.issue2.ViewPagerActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +26,10 @@ class MainActivity : AppCompatActivity() {
     fun initListener() {
         binding.viewpagerBtn.setOnClickListener {
             startActivity(Intent(this, ViewPagerActivity::class.java))
+        }
+
+        binding.talkDrawerFocusBtn.setOnClickListener {
+            startActivity(Intent(this, KakaoTalkDrawerActivity::class.java))
         }
 
 
