@@ -63,7 +63,7 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
             ViewCompat.setAccessibilityDelegate(holder.itemView, object : AccessibilityDelegateCompat() {
                 override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
                     super.onInitializeAccessibilityNodeInfo(v, info)
-                    info.roleDescription = "버튼" //"." 으로 하면 음성 출력은 안 되긴 함
+                    info.roleDescription = "." //"." 으로 하면 음성 출력은 안 되긴 함
                 }
 
                 override fun performAccessibilityAction(
