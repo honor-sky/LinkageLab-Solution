@@ -9,7 +9,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="과제2(이슈개선)"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AccessibilitySolution"
@@ -19,7 +19,6 @@
     <activity
         android:name=".presentation.MainActivity"
         android:exported="true"
-        android:label="MainActivity"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -30,13 +29,12 @@
     <activity
         android:name=".presentation.issue2.ViewPagerActivity"
         android:exported="true"
-        android:label="ViewPagerActivity"
         android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <activity
             android:name=".presentation.issue1.KakaoTalkDrawerActivity"
             android:exported="true"
-            android:label="KakaoTalkDrawerActivity"
+            android:label="톡서랍 화면"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 

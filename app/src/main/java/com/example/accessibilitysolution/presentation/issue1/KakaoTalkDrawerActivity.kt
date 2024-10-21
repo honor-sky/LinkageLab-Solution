@@ -2,6 +2,7 @@ package com.example.accessibilitysolution.presentation.issue1
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.accessibility.AccessibilityEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.example.accessibilitysolution.databinding.ActivityTalkdrawerBinding
@@ -30,15 +31,15 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
         }
 
         binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            // 전체 스크롤 범위
             val totalScrollRange = appBarLayout.totalScrollRange
 
             if (verticalOffset == 0) {
                 // 완전히 펼쳐진 상태
-                Log.d("CollapsingToolbar", "Expanded")
+                binding.drawerTtile.visibility = View.GONE
+
             } else if (Math.abs(verticalOffset) >= totalScrollRange) {
                 // 완전히 접힌 상태
-                Log.d("CollapsingToolbar", "Collapsed")
+                binding.drawerTtile.visibility = View.VISIBLE
 
                 // 다음 초점 지정
                 binding.layout1.requestFocus()
@@ -46,7 +47,7 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
 
             } else {
                 // 중간 상태
-                Log.d("CollapsingToolbar", "Intermediate")
+
             }
         })
 

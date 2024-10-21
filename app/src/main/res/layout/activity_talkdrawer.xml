@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -15,59 +15,68 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-
+            <!--  android:paddingBottom="50dp"-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginTop="80dp"
+                android:gravity="center"
                 android:orientation="vertical"
                 app:layout_collapseMode="parallax">
 
-            <ImageView
-                android:id="@+id/profileImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_launcher_background" />
-
-            <TextView
-                android:id="@+id/talkRoomTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="카카오톡 테스트방"
-                android:textSize="25sp"
-                android:textColor="@color/black" />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
+                <ImageView
+                    android:id="@+id/profileImg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="설정 변경일 2024.05.01"
-                    android:textSize="15sp"
-                    android:textColor="@color/kakao_grey"/>
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="3dp"
-                    android:background="@color/kakao_grey"/>
+                    android:background="@drawable/ic_launcher_background" />
 
                 <TextView
+                    android:id="@+id/talkRoomTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="용량 100MB"
-                    android:textSize="15sp"
-                    android:textColor="@color/kakao_grey"/>
-            </LinearLayout>
+                    android:text="카카오톡 테스트방"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="설정 변경일 2024.05.01"
+                        android:textColor="@color/kakao_grey"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="3dp"
+                        android:background="@color/kakao_grey" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="용량 100MB"
+                        android:textColor="@color/kakao_grey"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/base_roundsquare_white_border_grey"
+                    android:text="데이터 보관중"
+                    android:textColor="@color/kakao_black"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -83,32 +92,31 @@
                     android:id="@+id/backBtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginStart="8dp"
-                    android:contentDescription="뒤로가기"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/ic_arrow_left"
-                    android:backgroundTint="@color/kakao_black"/>
+                    android:backgroundTint="@color/kakao_black"
+                    android:contentDescription="뒤로가기" />
 
                 <TextView
+                    android:id='@+id/drawerTtile'
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="카카오톡 테스트방"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                    android:visibility="gone" />
 
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
-
-
     <!-- 스크롤 가능한 아래 영역 -->
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -117,48 +125,48 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="15dp"
-            android:orientation="vertical"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/layout1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="이 채팅방 데이터는 톡서랍에서\n안전하게 보관 중입니다. "
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="톡서랍 가입 이후의 대화내용이 보관되고 있어요.\n보관을 중단한 적이 있다면 해당 데이터는 제외됩니다."
-                android:textSize="12sp"
-                android:textColor="@color/grey"
-                android:textStyle="bold"/>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/layout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이 채팅방 데이터는 톡서랍에서\n안전하게 보관 중입니다. "
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="톡서랍 가입 이후의 대화내용이 보관되고 있어요.\n보관을 중단한 적이 있다면 해당 데이터는 제외됩니다."
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="15dp"
                 android:layout_marginTop="15dp"
+                android:background="@color/white"
                 android:orientation="vertical"
-                android:background="@color/white">
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="이 채팅방의 데이터 보관을\n중단하고 싶으신가요?"
-                    android:textSize="18sp"
                     android:textColor="@color/black"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -166,34 +174,58 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="이 채팅방에서 주고받는 대화내용, 미디어 파일은\n 자동으로 보관되지 않습니다.\n\n톡서랍에서 보관 중이던 이전 데이터도 모두 삭제됩니다.\n보관이 중단된 방은 카카오톡 재설치 시 복원이 불가능합니다."
-                    android:textSize="12sp"
                     android:textColor="@color/grey"
-                    android:textStyle="bold"/>
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="1번 어쩌구저쩌구 엄청 긴 내용\n2번 어쩌구저쩌구 엄청 긴 내용\n3번 어쩌구저쩌구 엄청 긴 내용"
-                    android:textSize="12sp"
                     android:textColor="@color/grey"
-                    android:textStyle="bold"/>
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="15dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이 채팅방의 데이터 보관을\n중단하고 싶으신가요?"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="이 채팅방에서 주고받는 대화내용, 미디어 파일은\n 자동으로 보관되지 않습니다.\n\n톡서랍에서 보관 중이던 이전 데이터도 모두 삭제됩니다.\n보관이 중단된 방은 카카오톡 재설치 시 복원이 불가능합니다."
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="1번 어쩌구저쩌구 엄청 긴 내용\n2번 어쩌구저쩌구 엄청 긴 내용\n3번 어쩌구저쩌구 엄청 긴 내용"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </LinearLayout>
-
-    </ScrollView>
-
-<!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
--->
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

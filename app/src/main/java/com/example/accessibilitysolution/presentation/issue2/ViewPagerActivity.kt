@@ -20,7 +20,9 @@ class ViewPagerActivity : AppCompatActivity()  {
     private lateinit var binding: ActivityViewpagerBinding
 
     private val adapter = KakaotTBannerAdapter()
-    val bannerImgList = mutableListOf(R.drawable.img_viewpager_busstop, R.drawable.img_viewpager_home)
+    val bannerImgList = mutableListOf(R.drawable.ic_home, R.drawable.ic_busstop)
+    val bannerTitleList = mutableListOf("집으로한번에", "주변정류장")
+    val bannermessageList = mutableListOf("위치 사용을 동의하세요.","위치 사용을동의하세요.")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,23 +31,22 @@ class ViewPagerActivity : AppCompatActivity()  {
         setContentView(binding.root)
 
         setupViewPager()
-
+        initListener()
 
     }
 
     fun setupViewPager() {
         binding.listViewpager2.adapter = adapter
-        adapter.setData(bannerImgList)
+        adapter.setData(bannerImgList, bannerTitleList, bannermessageList)
 
         binding.listViewpager2.adapter = adapter
     }
 
-    fun setPage() {
-
+    fun initListener() {
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 
-    fun moveToNextBanner() {
-
-    }
 
 }
