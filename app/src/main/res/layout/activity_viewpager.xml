@@ -37,16 +37,15 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
+<!--    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:accessibilityHeading="true"
         android:padding="30dp"
-        android:text="ViewPager2\n(실제 서비스에서 사용)"
+        android:text="ViewPager2"
         android:textAlignment="center"
-        android:textSize="20sp" />
-
+        android:textSize="20sp" />-->
 
     <!-- 크기 때문? -->
     <RelativeLayout
@@ -65,31 +64,6 @@
             android:paddingLeft="6.5dp"
             android:paddingRight="3dp" />
 
-
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:accessibilityHeading="true"
-        android:padding="30dp"
-        android:text="ViewPager"
-        android:textAlignment="center"
-        android:textSize="20sp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/light_grey">
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/listViewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:clipToPadding="false"
-            android:paddingLeft="6.5dp"
-            android:paddingRight="3dp" />
-    </RelativeLayout>
 </LinearLayout>

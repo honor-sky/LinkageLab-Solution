@@ -57,13 +57,12 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
     }
 
     override fun onBindViewHolder(holder: KakaotTBannerViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        //if (bannerDataList != null) {
 
             // holder가 관리하는 아이템(페이지)에 접근해 유형정보 바꿔줘야 함
             ViewCompat.setAccessibilityDelegate(holder.itemView, object : AccessibilityDelegateCompat() {
                 override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
                     super.onInitializeAccessibilityNodeInfo(v, info)
-                    info.roleDescription = "." //"." 으로 하면 음성 출력은 안 되긴 함
+                    info.roleDescription = "버튼" //"." 으로 하면 음성 출력은 안 되긴 함
                 }
 
                 override fun performAccessibilityAction(
@@ -92,8 +91,8 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
                     }
             })
 
-            holder.bind(position) //bannerDataList!![position]
-       // }
+            holder.bind(position)
+
     }
 
     override fun getItemCount() = bannerImgDataList?.size ?: 0
