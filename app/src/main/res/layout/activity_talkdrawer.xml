@@ -94,6 +94,7 @@
     </com.google.android.material.appbar.AppBarLayout>
     <!-- 스크롤 가능한 아래 영역 -->
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

@@ -22,8 +22,6 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTalkdrawerBinding
 
-    var isTraval = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,8 +64,9 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
                     AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS -> {
                         // AppBar 펼치기
                         binding.appbar.setExpanded(true,true)
-                        // dataSavedBtn에 포커스 이동
-                        //binding.dataSavedBtn.requestFocus()
+                        // 스크롤 위로 최대한 올리기
+                        binding.scrollView.smoothScrollTo(0, 0)
+
                         super.performAccessibilityAction(host, action, args)
                     }
                     else -> super.performAccessibilityAction(host, action, args)
@@ -85,16 +84,12 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
                 if(checkFocusContent(viwegroup)){
                     return true
                 }
-
             }
             if (child.isAccessibilityFocused) {
                 // 현재 포커스를 가진 자식 뷰가 있음
-                Log.d("FocusedView", "Focused child: ${child.id}")
                 return true
             }
         }
         return false
     }
-
-
 }

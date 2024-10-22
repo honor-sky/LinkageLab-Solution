@@ -20,9 +20,6 @@ class MainActivity : AppCompatActivity() {
         initListener()
     }
 
-
-
-
     fun initListener() {
         binding.viewpagerBtn.setOnClickListener {
             startActivity(Intent(this, ViewPagerActivity::class.java))
