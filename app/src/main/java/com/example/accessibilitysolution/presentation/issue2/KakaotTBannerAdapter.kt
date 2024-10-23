@@ -58,7 +58,7 @@ class KakaotTBannerAdapter(): RecyclerView.Adapter<KakaotTBannerAdapter.KakaotTB
 
     override fun onBindViewHolder(holder: KakaotTBannerViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
-            // holder가 관리하는 아이템(페이지)에 접근해 유형정보 바꿔줘야 함
+        /* holder가 관리하는 아이템(페이지)에 접근해 유형정보 바꿔줘야 함 */
             ViewCompat.setAccessibilityDelegate(holder.itemView, object : AccessibilityDelegateCompat() {
                 override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
                     super.onInitializeAccessibilityNodeInfo(v, info)

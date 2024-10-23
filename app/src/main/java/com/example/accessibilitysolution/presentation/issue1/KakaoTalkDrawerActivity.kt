@@ -1,26 +1,20 @@
 package com.example.accessibilitysolution.presentation.issue1
 
 import android.os.Bundle
-import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.AccessibilityDelegate
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.core.view.AccessibilityDelegateCompat
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.example.accessibilitysolution.databinding.ActivityTalkdrawerBinding
 import com.google.android.material.appbar.AppBarLayout
-import java.util.Objects
+
 
 class KakaoTalkDrawerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTalkdrawerBinding
+
+    var isCollaspNow = false // 영역 접힌 직후에 명시적 초점 이동 여부
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +23,14 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initListener()
+        initAccessibility()
+
     }
 
+
     fun initListener() {
+
+        binding.scrollView.setSmoothScrollingEnabled(true)
 
         binding.backBtn.setOnClickListener {
             finish()
@@ -48,33 +47,44 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
                 // 완전히 접힌 상태
                 binding.drawerTtile.visibility = View.VISIBLE
 
-                // 다음 초점 지정
-                // 현재 초점이 content 영역에 있다면 초점 이동 안 함
-                if(!checkFocusContent(binding.contentLayout)) {
-                    // collaspToolbar 영역에 있다면 layout1으로 가도록 지정
-                    binding.layout1Text.requestFocus()
-                    binding.layout1Text.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
-                }
-            }
-        })
-
-        binding.layout1Text.setAccessibilityDelegate(object : View.AccessibilityDelegate() {
-            override fun performAccessibilityAction(host: View, action: Int, args: Bundle?): Boolean {
-                return when (action) {
-                    AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS -> {
-                        // AppBar 펼치기
-                        binding.appbar.setExpanded(true,true)
-                        // 스크롤 위로 최대한 올리기
-                        binding.scrollView.smoothScrollTo(0, 0)
-
-                        super.performAccessibilityAction(host, action, args)
-                    }
-                    else -> super.performAccessibilityAction(host, action, args)
+                // 현재 초점이 접힌 화면에 있을 경우만 명시적으로 초점 이동
+                if(!checkFocusContent(binding.contentLayout)) { // 스크롤 되는 영역(contentLayout)에 초점이 없으면 -> 강제 초점 이동
+                    isCollaspNow = true
+                    binding.layout1TextView1.requestFocus()
+                    binding.layout1TextView1.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
             }
         })
     }
 
+    fun initAccessibility() {
+
+        binding.layout1TextView1.setAccessibilityDelegate(object : View.AccessibilityDelegate() {
+            override fun performAccessibilityAction(host: View, action: Int, args: Bundle?): Boolean {
+                return when (action) {
+                    AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS -> {
+                         /*
+                         * 화면이 접힌 이후에 명시적으로 layout1Text로 초점 이동을 해준 경우와
+                         * 접힘 상태에서 역탐색을 위해 다시 접힌 영역을 펴줘야 하는 경우 구분
+                         */
+                        if(!isCollaspNow) {
+                            binding.appbar.setExpanded(true,true)   // 접힌 영역 펼치기
+                            binding.scrollView.smoothScrollTo(0, 0)  // 스크롤 위로 최대한 올리기 (역탐색 비정상 수행 방지용)
+
+                        } else {
+
+                            isCollaspNow = false
+                        }
+
+                        super.performAccessibilityAction(host, action, args)
+                    }
+                        else -> super.performAccessibilityAction(host, action, args)
+                }
+            }
+        })
+    }
+
+    // 접힌 영역을 제외한 영역에 초점이 있는지 확인
     fun checkFocusContent(view: ViewGroup) : Boolean {
         for (i in 0 until view.childCount) {
             val child = view.getChildAt(i)
