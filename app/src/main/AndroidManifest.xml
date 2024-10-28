@@ -36,6 +36,13 @@
             android:exported="true"
             android:label="톡서랍 화면"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity android:name=".presentation.issue4.KakaoPageActivity"
+            android:exported="true"
+            android:label="카카오페이지 웹소설 화면"
+            android:theme="@style/Theme.AccessibilitySolution" />
     </application>
+
+
 
 </manifest>

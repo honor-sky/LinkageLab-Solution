@@ -62,6 +62,14 @@
                 android:text="카카오톡 톡서랍 초점"
                 android:textSize="20sp" />
 
+            <Button
+                android:id="@+id/kakaoPageNovelBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="카카오페이지 웹소설 슬라이더"
+                android:textSize="20sp" />
+
         </LinearLayout>
     </ScrollView>
 
