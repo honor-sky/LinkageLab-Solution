@@ -39,6 +39,8 @@
                 android:contentDescription="화면 밝기 조절기 N퍼센트"/>
             <!--com.google.android.material.slider.Slider-->
 
+
+
             <ImageButton
                 android:id="@+id/systemBrightBtn"
                 android:layout_width="25dp"
@@ -49,6 +51,18 @@
                 android:contentDescription="화면 밝기 설정에 따름"/>
 
         </LinearLayout>
+
+            <com.google.android.material.slider.Slider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:contentDescription="화면 밝기 조절기 N퍼센트"/>
+
+            <com.google.android.material.slider.RangeSlider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:contentDescription="화면 밝기 조절기 N퍼센트"/>
 
         </LinearLayout>
     </FrameLayout>
