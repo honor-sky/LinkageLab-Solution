@@ -62,12 +62,11 @@ class ViewPagerActivity : AppCompatActivity()  {
         adapterPagerFirst.setData(bannerImgList, bannerTitleList, bannermessageList)
         binding.viewpagerPagerInfoFirstNoFocus.adapter = adapterPagerFirst
 
-        // 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X
-        adapterPagerFirstFocus.setData(bannerImgList, bannerTitleList, bannermessageList)
-        binding.viewpagerPagerInfoFirstFocus.adapter = adapterPagerFirstFocus
 
-/*
-        binding.viewpagerPagerInfoFirstFocus.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewpagerPagerInfoFirstNoFocus.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+            }
             override fun onPageSelected(position: Int) {
                 // 페이지 변경 시 커스텀 접근성 메시지 출력
 
@@ -75,9 +74,18 @@ class ViewPagerActivity : AppCompatActivity()  {
                 val messageInfo = "${bannerTitleList!!.get(position)}, ${bannermessageList!!.get(position)}"
                 val actionInfo = "활성화 하려면 두번 탭하세요"
 
-                binding.viewpagerPagerInfoFirstFocus.announceForAccessibility("$pagerInfo. $messageInfo. $actionInfo")  // 커스텀 안내 메시지
+                binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(pagerInfo)
+                binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(messageInfo)
+                binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(actionInfo)  // 커스텀 안내 메시지
             }
-        })*/
+        })
+
+
+        // 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X
+        adapterPagerFirstFocus.setData(bannerImgList, bannerTitleList, bannermessageList)
+        binding.viewpagerPagerInfoFirstFocus.adapter = adapterPagerFirstFocus
+
+
 
 
 

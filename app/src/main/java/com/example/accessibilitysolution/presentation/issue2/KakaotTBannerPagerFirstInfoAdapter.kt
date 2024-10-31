@@ -54,7 +54,6 @@ class KakaotTBannerPagerFirstInfoAdapter (): RecyclerView.Adapter<KakaotTBannerP
 
     override fun onBindViewHolder(holder: KakaotTBannerOnlyPageInfoViewHolder, position: Int) {
 
-
         /* holder가 관리하는 아이템(페이지)에 접근해 유형정보 바꿔줘야 함 */
         ViewCompat.setAccessibilityDelegate(holder.itemView, object : AccessibilityDelegateCompat() {
             override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
@@ -70,15 +69,22 @@ class KakaotTBannerPagerFirstInfoAdapter (): RecyclerView.Adapter<KakaotTBannerP
                 // 원래 정보 출력 뒤 커스텀 메시지를 안내
                // val handled = super.performAccessibilityAction(host, action, args)
 
-                val pagerInfo = "총 ${bannerImgDataList!!.size}페이지 중 ${position + 1}페이지"
-                holder.itemView.announceForAccessibility(pagerInfo)
+                if(action == AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) {
+                    if(prevPosition == position) {
+                        holder.itemView.requestFocus()
 
-                val messageInfo = "${bannerTitleDataList!!.get(position)}, ${bannerMessageDataList!!.get(position)}"
-                val actionInfo = "활성화 하려면 두번 탭하세요"
-                holder.itemView.announceForAccessibility(messageInfo)
-                holder.itemView.announceForAccessibility(actionInfo)
+                        val pagerInfo = "총 ${bannerImgDataList!!.size}페이지 중 ${position + 1}페이지"
+                        holder.itemView.announceForAccessibility(pagerInfo)
 
-                prevPosition = position
+                        val messageInfo = "${bannerTitleDataList!!.get(position)}, ${bannerMessageDataList!!.get(position)}"
+                        val actionInfo = "활성화 하려면 두번 탭하세요"
+                        holder.itemView.announceForAccessibility(messageInfo)
+                        holder.itemView.announceForAccessibility(actionInfo)
+
+                        prevPosition = position
+
+                    }
+                }
 
                 return true
 
