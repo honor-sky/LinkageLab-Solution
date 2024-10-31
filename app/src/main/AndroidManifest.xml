@@ -41,6 +41,11 @@
             android:exported="true"
             android:label="카카오페이지 웹소설 화면"
             android:theme="@style/Theme.AccessibilitySolution" />
+
+        <activity android:name=".presentation.issue2.BannerActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AccessibilitySolution" />
+
     </application>
 
 

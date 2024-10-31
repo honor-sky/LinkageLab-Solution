@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:accessibilityHeading="true"
             android:paddingStart="10dp"
-            android:text="카카오 이슈 솔루션"
+            android:text="페이지 정보 테스트"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -48,15 +48,69 @@
         android:textSize="20sp" />-->
 
     <!-- 크기 때문? -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+    <!-- 유형 정보(페이저) + 콘텐츠 정보 + 페이지 개수 정보(총 몇페이지~) + 클릭 이벤트 O -->
+  <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="유형 정보(페이지), 콘텐츠 정보 + \n페이지 위치 정보(총 몇페이지~) + \n클릭 이벤트 O  + 제스쳐 안내 O (활성화 ~)"/>
+
     <RelativeLayout
-        android:id="@+id/listViewpager2Layout"
+        android:id="@+id/viewpager2Layout1"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/light_grey"
         android:importantForAccessibility="no">
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/listViewpager2"
+            android:id="@+id/viewpagerWithEvent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:focusable= "true"
+            android:focusableInTouchMode="true"
+            android:paddingLeft="6.5dp"
+            android:paddingRight="3dp" />
+
+    </RelativeLayout>
+
+
+    <!-- 유형 정보(페이저) +  콘텐츠 정보 + 페이지 개수 정보 + 클릭 이벤트 X -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="유형 정보(페이지), 콘텐츠 정보 + \n페이지 위치 정보 +\n클릭 이벤트 X + 제스쳐 안내 X"/>
+
+
+    <RelativeLayout
+        android:id="@+id/viewpager2Layout2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/light_grey"
+        android:importantForAccessibility="no">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpagerWithoutEvent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -65,5 +119,128 @@
             android:paddingRight="3dp" />
 
     </RelativeLayout>
+
+    <!-- 유형 정보(버튼) + 콘텐츠 정보 + 페이지 개수 정보 + 클릭 이벤트 X -->
+   <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="유형 정보(버튼), 콘텐츠 정보 + \n페이지 위치 정보 + \n클릭 이벤트 X + 제스처 안내 O"/>
+    <RelativeLayout
+        android:id="@+id/viewpager2Layout3"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/light_grey"
+        android:importantForAccessibility="no">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpagerButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:importantForAccessibility="yes"
+            android:paddingLeft="6.5dp"
+            android:paddingRight="3dp" />
+
+    </RelativeLayout>
+
+    <!-- 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X -->
+   <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="(초점X) 페이지 위치 정보(우선 출력) + \n유형 정보(페이지) +\n콘텐츠 정보 +\n클릭 이벤트 X + 제스처 안내 O"/>
+
+    <RelativeLayout
+        android:id="@+id/viewpager2Layout4"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/light_grey"
+        android:importantForAccessibility="yes">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpagerPagerInfoFirstNoFocus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:importantForAccessibility="yes"
+            android:paddingLeft="6.5dp"
+            android:paddingRight="3dp" />
+
+
+    </RelativeLayout>
+
+    <!-- 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X -->
+    <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:textAlignment="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="페이지 위치 정보(우선 출력), 유형 정보(페이지) +\n콘텐츠 정보 + \n클릭 이벤트 X + 제스처 안내 O \n(페이지 전환시 페이지 위치 안내 다시)"/>
+
+            <RelativeLayout
+                android:id="@+id/viewpager2Layout5"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/light_grey"
+                android:importantForAccessibility="no">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewpagerPagerInfoFirstFocus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:importantForAccessibility="yes"
+                    android:paddingLeft="6.5dp"
+                    android:paddingRight="3dp" />
+
+
+            </RelativeLayout>
+
+
+            <!--  <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="페이지 정보 + 페이지 전환시 페이지 정보\n페이지 정보 음성 피드백 "/>
+
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="클릭 동작 있음"/>
+
+
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="30dp"
+                  android:text="페이지 정보 + 페이지 전환시 페이지 정보\n페이지 정보 음성 피드백 "/>
+
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="클릭 동작 없음"/>
+
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="30dp"
+                  android:text="페이지 정보 + 페이지 전환시 페이지 정보\n페이지 정보 음성 피드백 (순서다름)"/>-->
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>
