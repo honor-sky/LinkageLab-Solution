@@ -26,12 +26,14 @@ class ViewPagerActivity : AppCompatActivity()  {
     private val adapterWithEvent = KakaotTBannerAdapter(true, true, false, { clickAction() })
     private val adapterWithoutEvent = KakaotTBannerAdapter(false, false, false, { clickAction() })
     private val adapterButton = KakaotTBannerAdapter(false, true, true, { clickAction() })
-    private val adapterPagerFirst = KakaotTBannerPagerFirstInfoAdapter()
+    private val adapterPagerFirstNoFocus = KakaotTBannerPagerFirstInfoAdapter() //KakaotTBannerPagerFirstInfoAdapter()
     private val adapterPagerFirstFocus = KakaotTBannerPagerFirstInfoFocusAdapter()
 
     val bannerImgList = mutableListOf(R.drawable.ic_home, R.drawable.ic_busstop)
     val bannerTitleList = mutableListOf("집으로한번에", "주변정류장")
     val bannermessageList = mutableListOf("위치 사용을 동의하세요.","위치 사용을 동의하세요.")
+
+    var prevPosition = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +48,7 @@ class ViewPagerActivity : AppCompatActivity()  {
     }
 
     fun setupViewPager() {
+
         // 유형 정보(페이저) + 콘텐츠 정보 + 페이지 개수 정보(총 몇페이지~) + 클릭 이벤트 O
         adapterWithEvent.setData(bannerImgList, bannerTitleList, bannermessageList)
         binding.viewpagerWithEvent.adapter = adapterWithEvent
@@ -59,17 +62,26 @@ class ViewPagerActivity : AppCompatActivity()  {
         binding.viewpagerButton.adapter = adapterButton
 
         // 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X
-        adapterPagerFirst.setData(bannerImgList, bannerTitleList, bannermessageList)
-        binding.viewpagerPagerInfoFirstNoFocus.adapter = adapterPagerFirst
+        adapterPagerFirstNoFocus.setData(bannerImgList, bannerTitleList, bannermessageList)
+        binding.viewpagerPagerInfoFirstNoFocus.adapter = adapterPagerFirstNoFocus
+
+        //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+        //binding.viewpagerPagerInfoFirstNoFocus.isAccessibilityFocused
+        binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+        //binding.viewpagerPagerInfoFirstNoFocus.isFocusable = false
 
 
         binding.viewpagerPagerInfoFirstNoFocus.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrollStateChanged(state: Int) {
+
+                //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
                 super.onPageScrollStateChanged(state)
             }
             override fun onPageSelected(position: Int) {
-                // 페이지 변경 시 커스텀 접근성 메시지 출력
+               // binding.viewpagerPagerInfoFirstNoFocus.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED)
 
+
+                // 페이지 변경 시 커스텀 접근성 메시지 출력
                 val pagerInfo = "총 ${bannerImgList!!.size}페이지 중 ${position + 1}페이지"
                 val messageInfo = "${bannerTitleList!!.get(position)}, ${bannermessageList!!.get(position)}"
                 val actionInfo = "활성화 하려면 두번 탭하세요"
@@ -77,16 +89,34 @@ class ViewPagerActivity : AppCompatActivity()  {
                 binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(pagerInfo)
                 binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(messageInfo)
                 binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(actionInfo)  // 커스텀 안내 메시지
+
+                //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
             }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                /*if(prevPosition == position) {
+                    binding.viewpagerPagerInfoFirstNoFocus.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED)
+
+                    //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+                } else {
+                    //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+                }
+
+                prevPosition = position*/
+
+            }
+
         })
 
 
         // 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X
         adapterPagerFirstFocus.setData(bannerImgList, bannerTitleList, bannermessageList)
         binding.viewpagerPagerInfoFirstFocus.adapter = adapterPagerFirstFocus
-
-
-
 
 
     }
