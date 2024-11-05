@@ -19,7 +19,6 @@ class KakaotTBannerPagerFirstInfoFocusAdapter (): RecyclerView.Adapter<KakaotTBa
     private var bannerMessageDataList : MutableList<String>? = null
 
 
-
     fun setData(bannerImgDataList : MutableList<Int>, bannerTitleDataList : MutableList<String>, bannerMessageDataList : MutableList<String>) {
         bannerImgDataList.let {
             this.bannerImgDataList = bannerImgDataList

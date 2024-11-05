@@ -54,11 +54,17 @@ class KakaotTBannerPagerFirstInfoAdapter (): RecyclerView.Adapter<KakaotTBannerP
 
     override fun onBindViewHolder(holder: KakaotTBannerOnlyPageInfoViewHolder, position: Int) {
 
+
         /* holder가 관리하는 아이템(페이지)에 접근해 유형정보 바꿔줘야 함 */
         ViewCompat.setAccessibilityDelegate(holder.itemView, object : AccessibilityDelegateCompat() {
             override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
                 super.onInitializeAccessibilityNodeInfo(v, info)
 
+            }
+
+            override fun onInitializeAccessibilityEvent(host: View, event: AccessibilityEvent) {
+                super.onInitializeAccessibilityEvent(host, event)
+                Log.d("onInitializeAccessibilityEvent","${event}")
             }
 
             override fun performAccessibilityAction(
@@ -67,8 +73,6 @@ class KakaotTBannerPagerFirstInfoAdapter (): RecyclerView.Adapter<KakaotTBannerP
                 args: Bundle?
             ): Boolean {
                 // 원래 정보 출력 뒤 커스텀 메시지를 안내
-               // val handled = super.performAccessibilityAction(host, action, args)
-
                 if(action == AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) {
                     if(prevPosition == position) {
                         holder.itemView.requestFocus()
@@ -87,6 +91,7 @@ class KakaotTBannerPagerFirstInfoAdapter (): RecyclerView.Adapter<KakaotTBannerP
                 }
 
                 return true
+
 
             }
         })
