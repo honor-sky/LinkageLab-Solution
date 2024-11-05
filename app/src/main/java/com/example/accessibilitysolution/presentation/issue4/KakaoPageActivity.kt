@@ -1,6 +1,8 @@
 package com.example.accessibilitysolution.presentation.issue4
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +11,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.accessibilitysolution.R
 import com.example.accessibilitysolution.databinding.ActivityNobelBinding
 
 
@@ -19,6 +22,9 @@ class KakaoPageActivity : AppCompatActivity() {
 
     val REQUEST_CODE_WRITE_SETTINGS = 1000
 
+    var brightnessProgress : Int = 40
+
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,38 +34,28 @@ class KakaoPageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initListener()
-        initObserver()
         initAccessibility()
+
+        // 슬라이더 초기화
+        binding.brightSlider.progress = brightnessProgress
+
+        // 초기 버튼 색 설정
+        if(binding.pageBtn.isSelected) {
+            binding.pageBtn.setTextColor(Color.BLACK)
+            binding.scrollBtn.setTextColor(Color.GRAY)
+        } else {
+            binding.pageBtn.setTextColor(Color.GRAY)
+            binding.scrollBtn.setTextColor(Color.BLACK)
+        }
+
     }
+
 
     fun initListener() {
 
         binding.systemBrightBtn.setOnClickListener {
             viewmodel.setSystemBrighter()
         }
-
-
-        binding.brightSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                val window = window
-                val layoutParams = window.attributes
-                layoutParams.screenBrightness = (p1).toFloat()
-                window.attributes = layoutParams
-            }
-
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-                TODO("Not yet implemented")
-            }
-
-        })
-
-        // 슬라이더 값 초기화
-        //val currentBrightness = getCurrentScreenBrightness()
-        binding.brightSlider.progress = 40
 
         // 슬라이더 리스너
         binding.brightSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -72,13 +68,15 @@ class KakaoPageActivity : AppCompatActivity() {
                         startActivityForResult(intent, REQUEST_CODE_WRITE_SETTINGS)
                     } else {
                         // 권한이 이미 허용된 경우 밝기 설정 함수 호출
-                        setScreenBrightness(progress)
+                        brightnessProgress = progress
+                        setScreenBrightness(brightnessProgress)
                     }
                 } else {
                     // Android 6.0 미만에서는 직접적으로 설정 가능
-                    setScreenBrightness(progress)
+                    brightnessProgress = progress
+                    setScreenBrightness(brightnessProgress)
                 }
-                //setScreenBrightness(progress)
+
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -99,14 +97,33 @@ class KakaoPageActivity : AppCompatActivity() {
 
                 // 기기 화면 밝기 설정 따르기
                 val deviceBrightness = getCurrentScreenBrightness()
-                //Toast.makeText(this, "기기 화면 밝기를 따릅니다: $deviceBrightness", Toast.LENGTH_SHORT).show()
+
             } else {
                 binding.brightSlider.isEnabled = true
-                //val currentBrightness = getCurrentScreenBrightness()
-                binding.brightSlider.progress = 40
+                binding.brightSlider.progress = brightnessProgress
+                setScreenBrightness(brightnessProgress)
             }
 
         }
+
+        binding.nextPageGroup.setOnCheckedChangeListener { group, checkedId ->
+
+            // 선택된 버튼의 텍스트 색상을 검정색으로 변경
+            when (checkedId) {
+                R.id.pageBtn -> {
+                    binding.pageBtn.setTextColor(Color.BLACK)
+                    binding.scrollBtn.setTextColor(Color.GRAY)
+                }
+
+                R.id.scrollBtn ->  {
+                    binding.pageBtn.setTextColor(Color.GRAY)
+                    binding.scrollBtn.setTextColor(Color.BLACK)
+                }
+
+            }
+        }
+
+
     }
 
     private fun getCurrentScreenBrightness(): Int {
@@ -122,8 +139,6 @@ class KakaoPageActivity : AppCompatActivity() {
             layoutParams.screenBrightness = brightnessValue / 255f
             window.attributes = layoutParams
 
-            //layoutParams.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
-            //window.attributes = layoutParams
         }
     }
 
@@ -132,7 +147,7 @@ class KakaoPageActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_WRITE_SETTINGS) {
             if (Settings.System.canWrite(this)) {
                 // 권한이 허용된 경우
-                setScreenBrightness(40) // 밝기 설정 함수 호출
+                setScreenBrightness(brightnessProgress) // 밝기 설정 함수 호출
             } else {
                 // 권한이 거부된 경우
                 Toast.makeText(this, "WRITE_SETTINGS 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
@@ -141,33 +156,8 @@ class KakaoPageActivity : AppCompatActivity() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.R)
-    fun initObserver(){
-        viewmodel.isSelectedSystemBrighter.observe(this) {
-            if(it) {
-                // 시스템 설정 따름
-                //setScreenBrighter()
-                binding.brightSlider.isEnabled = false
-            } else {
-                binding.brightSlider.isEnabled = true
-
-            }
-        }
-
-    }
-
-
-/*    fun setScreenBrighter() {
-        val window = window
-        val layoutParams = window.attributes
-        layoutParams.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
-        window.attributes = layoutParams
-    }*/
 
     fun initAccessibility() {
-
-
-
         /*
         binding.brightSlider.setAccessibilityDelegate(object : View.AccessibilityDelegate() {
             @RequiresApi(Build.VERSION_CODES.R)

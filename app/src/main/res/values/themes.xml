@@ -14,10 +14,20 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="viewerSettingSeekbar" parent="Widget.AppCompat.SeekBar">
+<!--    <style name="SeekBarColor" parent="Widget.AppCompat.SeekBar">
+        <item name="colorAccent"> #000000 </item>
+    </style>-->
 
-        <item name="contentDescription">선택됨</item>
 
-
+    <style name="SeekBarEnabledStyle">
+        <item name="android:thumbTint">@color/black</item>
+        <item name="android:progressTint">@color/black</item>
     </style>
+
+    <!-- 비활성화 상태의 SeekBar 스타일 -->
+    <style name="SeekBarDisabledStyle">
+        <item name="android:thumbTint">@color/grey</item>
+        <item name="android:progressTint">@color/grey</item>
+    </style>
+
 </resources>

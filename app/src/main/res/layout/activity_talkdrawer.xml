@@ -19,6 +19,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <!-- 뒤로가기, 제목 툴바 -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,13 +42,13 @@
                     android:textColor="@color/black"
                     android:textSize="25sp" />
 
-                    <TextView
-                        android:id="@+id/stateText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="설정 변경일 2024.05.01 | 용량 100MB"
-                        android:textColor="@color/kakao_grey"
-                        android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/stateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="설정 변경일 2024.05.01 | 용량 100MB"
+                    android:textColor="@color/kakao_grey"
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/dataSavedBtn"
@@ -91,6 +92,8 @@
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
 

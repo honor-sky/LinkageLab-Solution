@@ -36,7 +36,7 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
             finish()
         }
 
-/*        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val totalScrollRange = appBarLayout.totalScrollRange
 
             if (verticalOffset == 0) {
@@ -54,7 +54,7 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
                     binding.layout1TextView1.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED)
                 }
             }
-        })*/
+        })
     }
 
     fun initAccessibility() {
@@ -67,14 +67,14 @@ class KakaoTalkDrawerActivity : AppCompatActivity() {
                          * 화면이 접힌 이후에 명시적으로 layout1Text로 초점 이동을 해준 경우와
                          * 접힘 상태에서 역탐색을 위해 다시 접힌 영역을 펴줘야 하는 경우 구분
                          */
-                     /*   if(!isCollaspNow) {
+                        if(!isCollaspNow) {
                             binding.appbar.setExpanded(true,true)   // 접힌 영역 펼치기
                             binding.scrollView.smoothScrollTo(0, 0)  // 스크롤 위로 최대한 올리기 (역탐색 비정상 수행 방지용)
 
                         } else {
 
                             isCollaspNow = false
-                        }*/
+                        }
 
                         super.performAccessibilityAction(host, action, args)
                     }
