@@ -80,7 +80,9 @@ class KakaotTBannerAdapter(val isClickEvent : Boolean, val isGestureInfo : Boole
                     // 원래 정보 출력 뒤 커스텀 메시지를 안내
                     val handled = super.performAccessibilityAction(host, action, args)
 
+                    // 초점 접근
                     if(action == AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) {
+                        // 최초 접근일때만
                         if(prevPosition == position) {
                             val pageInfoMessage = "총 ${bannerImgDataList!!.size}페이지 중 ${position + 1}페이지"
                             holder.binding.bannerItemMain.announceForAccessibility(pageInfoMessage)

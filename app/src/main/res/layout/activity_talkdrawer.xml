@@ -101,6 +101,7 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:importantForAccessibility="no">
+        <!-- 초점 안 가도록 수정 -> 전체 초점이 가면 이슈 발생 -->
 
         <LinearLayout
             android:id="@+id/contentLayout"
