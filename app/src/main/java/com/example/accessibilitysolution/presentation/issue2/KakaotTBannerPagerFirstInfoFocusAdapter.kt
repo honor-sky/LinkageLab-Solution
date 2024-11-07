@@ -78,7 +78,6 @@ class KakaotTBannerPagerFirstInfoFocusAdapter (): RecyclerView.Adapter<KakaotTBa
 
                 return handled
 
-
             }
         })
 

@@ -17,6 +17,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accessibilitysolution.R
 import com.example.accessibilitysolution.databinding.ActivityViewpagerBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ViewPagerActivity : AppCompatActivity()  {
 
@@ -61,58 +65,30 @@ class ViewPagerActivity : AppCompatActivity()  {
         adapterButton.setData(bannerImgList, bannerTitleList, bannermessageList)
         binding.viewpagerButton.adapter = adapterButton
 
-        // 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X
+
+        // 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X (초점 x)
         adapterPagerFirstNoFocus.setData(bannerImgList, bannerTitleList, bannermessageList)
         binding.viewpagerPagerInfoFirstNoFocus.adapter = adapterPagerFirstNoFocus
 
-        //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
-        //binding.viewpagerPagerInfoFirstNoFocus.isAccessibilityFocused
-        binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
-        //binding.viewpagerPagerInfoFirstNoFocus.isFocusable = false
-
-
         binding.viewpagerPagerInfoFirstNoFocus.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrollStateChanged(state: Int) {
-
-                //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
                 super.onPageScrollStateChanged(state)
             }
             override fun onPageSelected(position: Int) {
-               // binding.viewpagerPagerInfoFirstNoFocus.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED)
-
 
                 // 페이지 변경 시 커스텀 접근성 메시지 출력
-                val pagerInfo = "총 ${bannerImgList!!.size}페이지 중 ${position + 1}페이지"
-                val messageInfo = "${bannerTitleList!!.get(position)}, ${bannermessageList!!.get(position)}"
+                val messageInfo = "페이지, ${bannerTitleList!!.get(position)}, ${bannermessageList!!.get(position)}"
                 val actionInfo = "활성화 하려면 두번 탭하세요"
 
-                binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(pagerInfo)
-                binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(messageInfo)
-                binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(actionInfo)  // 커스텀 안내 메시지
-
-                //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
-            }
-
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                /*if(prevPosition == position) {
-                    binding.viewpagerPagerInfoFirstNoFocus.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED)
-
-                    //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
-                } else {
-                    //binding.viewpagerPagerInfoFirstNoFocus.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+                CoroutineScope(Dispatchers.IO).launch {
+                    delay(2500)
+                    binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(messageInfo)
+                    binding.viewpagerPagerInfoFirstNoFocus.announceForAccessibility(actionInfo)
                 }
-
-                prevPosition = position*/
 
             }
 
         })
-
 
         // 페이지 개수 정보 + 유형 정보(페이저) + 콘텐츠 정보 + 클릭 이벤트 X
         adapterPagerFirstFocus.setData(bannerImgList, bannerTitleList, bannermessageList)
@@ -125,11 +101,9 @@ class ViewPagerActivity : AppCompatActivity()  {
         binding.backBtn.setOnClickListener {
             finish()
         }
-
     }
 
     fun clickAction() {
         startActivity(Intent(this, BannerActivity::class.java))
-      //  Toast.makeText(this, "배너 클릭 동작이 수행됨", Toast.LENGTH_SHORT).show()
     }
 }

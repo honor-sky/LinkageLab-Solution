@@ -68,6 +68,7 @@
         android:layout_marginBottom="10dp"
         android:textSize="18sp"
         android:textStyle="bold"
+      android:textColor="@color/black"
         android:text="유형 정보(페이지), 콘텐츠 정보 + \n페이지 위치 정보(총 몇페이지~) + \n클릭 이벤트 O  + 제스쳐 안내 O (활성화 ~)"/>
 
     <RelativeLayout
@@ -99,6 +100,7 @@
         android:layout_marginBottom="10dp"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:text="유형 정보(페이지), 콘텐츠 정보 + \n페이지 위치 정보 +\n클릭 이벤트 X + 제스쳐 안내 X"/>
 
 
@@ -129,6 +131,7 @@
         android:layout_marginBottom="10dp"
         android:textSize="18sp"
         android:textStyle="bold"
+       android:textColor="@color/black"
         android:text="유형 정보(버튼), 콘텐츠 정보 + \n페이지 위치 정보 + \n클릭 이벤트 X + 제스처 안내 O"/>
     <RelativeLayout
         android:id="@+id/viewpager2Layout3"
@@ -157,6 +160,7 @@
         android:layout_marginBottom="10dp"
         android:textSize="18sp"
         android:textStyle="bold"
+       android:textColor="@color/black"
         android:text="(초점X) 페이지 위치 정보(우선 출력) + \n유형 정보(페이지) +\n콘텐츠 정보 +\n클릭 이벤트 X + 제스처 안내 O"/>
 
     <RelativeLayout
@@ -189,6 +193,7 @@
         android:layout_marginBottom="10dp"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:text="페이지 위치 정보(우선 출력), 유형 정보(페이지) +\n콘텐츠 정보 + \n클릭 이벤트 X + 제스처 안내 O \n(페이지 전환시 페이지 위치 안내 다시)"/>
 
             <RelativeLayout
@@ -210,34 +215,6 @@
 
             </RelativeLayout>
 
-
-            <!--  <TextView
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="페이지 정보 + 페이지 전환시 페이지 정보\n페이지 정보 음성 피드백 "/>
-
-              <TextView
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="클릭 동작 있음"/>
-
-
-              <TextView
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="30dp"
-                  android:text="페이지 정보 + 페이지 전환시 페이지 정보\n페이지 정보 음성 피드백 "/>
-
-              <TextView
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="클릭 동작 없음"/>
-
-              <TextView
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="30dp"
-                  android:text="페이지 정보 + 페이지 전환시 페이지 정보\n페이지 정보 음성 피드백 (순서다름)"/>-->
 
         </LinearLayout>
     </ScrollView>

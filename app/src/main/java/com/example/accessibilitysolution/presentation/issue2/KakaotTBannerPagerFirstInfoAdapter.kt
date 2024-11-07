@@ -54,17 +54,11 @@ class KakaotTBannerPagerFirstInfoAdapter (): RecyclerView.Adapter<KakaotTBannerP
 
     override fun onBindViewHolder(holder: KakaotTBannerOnlyPageInfoViewHolder, position: Int) {
 
-
         /* holder가 관리하는 아이템(페이지)에 접근해 유형정보 바꿔줘야 함 */
         ViewCompat.setAccessibilityDelegate(holder.itemView, object : AccessibilityDelegateCompat() {
             override fun onInitializeAccessibilityNodeInfo(v: View, info: AccessibilityNodeInfoCompat) {
                 super.onInitializeAccessibilityNodeInfo(v, info)
-
-            }
-
-            override fun onInitializeAccessibilityEvent(host: View, event: AccessibilityEvent) {
-                super.onInitializeAccessibilityEvent(host, event)
-                Log.d("onInitializeAccessibilityEvent","${event}")
+                info.roleDescription = "페이지"
             }
 
             override fun performAccessibilityAction(
@@ -73,25 +67,21 @@ class KakaotTBannerPagerFirstInfoAdapter (): RecyclerView.Adapter<KakaotTBannerP
                 args: Bundle?
             ): Boolean {
                 // 원래 정보 출력 뒤 커스텀 메시지를 안내
-                if(action == AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) {
-                    if(prevPosition == position) {
-                        holder.itemView.requestFocus()
 
-                        val pagerInfo = "총 ${bannerImgDataList!!.size}페이지 중 ${position + 1}페이지"
-                        holder.itemView.announceForAccessibility(pagerInfo)
+                val pagerInfo = "총 ${bannerImgDataList!!.size}페이지 중 ${position + 1}페이지"
+                val messageInfo = "페이지, ${bannerTitleDataList!!.get(position)}, ${bannerMessageDataList!!.get(position)}"
+                val actionInfo = "활성화 하려면 두번 탭하세요"
 
-                        val messageInfo = "${bannerTitleDataList!!.get(position)}, ${bannerMessageDataList!!.get(position)}"
-                        val actionInfo = "활성화 하려면 두번 탭하세요"
-                        holder.itemView.announceForAccessibility(messageInfo)
-                        holder.itemView.announceForAccessibility(actionInfo)
-
-                        prevPosition = position
-
-                    }
+                if(prevPosition == position) {
+                    //holder.itemView.requestFocus()
+                    holder.itemView.announceForAccessibility(pagerInfo)
+                    holder.itemView.announceForAccessibility(messageInfo)
+                    holder.itemView.announceForAccessibility(actionInfo)
                 }
 
-                return true
+                prevPosition = position
 
+                return false
 
             }
         })
