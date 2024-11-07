@@ -28,7 +28,7 @@
 
 [이슈3 - 카카오톡 시간 설정]</br>
 * 해당 이슈는 기본 컴포넌트 자체의 접근성 대응 이슈로 따로 개선 및 개발 작업 X (보고서의 설명 및 차선책 참고 바람)
-  
+</br>
 [이슈4 - 카카오페이지 슬라이더]</br>
 <img src="https://github.com/user-attachments/assets/b315ee3b-dd21-4b18-adee-e5608fd97ea8" width="200" height="400"/>
 
